@@ -1,5 +1,11 @@
-const TaskList = (props) => {
-    return(<></>)
+const TaskList = ({tasks}) => {
+    return (
+        <main>
+        </main>
+    );
 };
 
 export default TaskList;
+
+
+

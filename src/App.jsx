@@ -7,6 +7,15 @@ import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as authService from '../src/services/authService';
 
+//
+import TaskList from './components/TaskList/TaskList';
+import TaskDetails from './components/TaskDetails/TaskDetails';
+import TaskForm from './components/TaskForm/TaskForm';
+
+
+
+
+
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
 
@@ -20,7 +29,13 @@ const App = () => {
       <NavBar user={user} handleSignout={handleSignout} />
       <Routes>
         { user ? (
+          <>
           <Route path="/" element={<Collection user={user} />} />
+          <Route path="/tasks" element={<TaskList />} />
+          <Route path="/tasks/:taskId" element={<TaskDetails />} />
+          <Route path="/tasks/new" element={<TaskForm />} />
+          <Route path="/tasks/:taskId/edit" element={<TaskForm />} />
+          </>
         ) : (
           <Route path="/" element={<Landing />} />
         )}
