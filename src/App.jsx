@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
+import Collection from './components/Collection/Collection';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as authService from '../src/services/authService';
@@ -20,7 +20,7 @@ const App = () => {
       <NavBar user={user} handleSignout={handleSignout} />
       <Routes>
         { user ? (
-          <Route path="/" element={<Dashboard user={user} />} />
+          <Route path="/" element={<Collection user={user} />} />
         ) : (
           <Route path="/" element={<Landing />} />
         )}
