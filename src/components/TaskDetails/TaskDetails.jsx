@@ -22,7 +22,8 @@ const TaskDetails = ({ user }) => {
             <h2>{user.username} TodoLists: </h2>
             {task.items.map((item) => (
                 <div key={item._id}>
-                    <h3>{item.text}</h3>
+                    <input type="checkbox" name="list-items"/>
+                    <label htmlFor="list-items">{item.text}</label>
                 </div>
             ))}
             <h2>{user.username} Notes: </h2>
