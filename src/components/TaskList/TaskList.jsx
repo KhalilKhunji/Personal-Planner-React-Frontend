@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-const TaskList = ({tasks}) => {
+const TaskList = ({tasks, user}) => {
     return (
         <ul>
             {tasks.map((task)=> (
