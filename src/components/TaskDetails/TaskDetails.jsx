@@ -15,18 +15,16 @@ const TaskDetails = ({ user }) => {
     const getTask = async () => {
       const priorities = ["Low", "Medium", "High"];
 
-      const taskData = await taskService.show(taskId);
-      setTask(taskData);
-      const sortedData = taskData.items.sort(
-        (a, b) =>
-          priorities.indexOf(b.priority) - priorities.indexOf(a.priority)
-      );
+            const taskData = await taskService.show(taskId);
+            setTask(taskData);
 
-      // const itemData = await itemService.getItems(taskId, sortedData);
-      // setTask(itemData);
-    };
-    getTask();
-  }, [taskId]);
+            // SORT TASKS BY PRIORITY
+            console.log(taskData)
+            const sortedData = taskData.items.sort((a, b) => priorities.indexOf(b.priority) - priorities.indexOf(a.priority))
+            
+        };
+        getTask();
+    }, [taskId]);
 
   const handleAddItem = async (todolist) => {
     const newItem = await itemService.create(taskId, todolist);
