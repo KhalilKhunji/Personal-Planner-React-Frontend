@@ -1,50 +1,68 @@
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-import * as taskService from '../../services/taskService';
+import { useParams } from "react-router-dom";
+import * as taskService from "../../services/taskService";
+import ItemForm from "../ItemForm/ItemForm";
+import * as itemService from "../../services/itemService";
 
 const TaskDetails = ({ user }) => {
-    const [task, setTask] = useState(null);
-    // create state for high priority list items
-    const [item, setItem] = useState(null);
+  const [task, setTask] = useState(null);
 
-    const { taskId } = useParams();
+  const [showForm, setShowForm] = useState(false);
 
-    useEffect(() => {
-        const getTask = async () => {
-            const priorities = ['Low', 'Medium', 'High']
+  const { taskId } = useParams();
 
-            const taskData = await taskService.show(taskId);
-            setTask(taskData);
+  useEffect(() => {
+    const getTask = async () => {
+      const priorities = ["Low", "Medium", "High"];
 
-            // SORT TASKS BY PRIORITY
-            console.log(taskData)
-            const sortedData = taskData.items.sort((a, b) => priorities.indexOf(b.priority) - priorities.indexOf(a.priority))
-            
-        };
-        getTask();
-    }, [taskId]);
+      const taskData = await taskService.show(taskId);
+      setTask(taskData);
+      const sortedData = taskData.items.sort(
+        (a, b) =>
+          priorities.indexOf(b.priority) - priorities.indexOf(a.priority)
+      );
 
-    if (!task) return <main>Loading Task...</main>
+      // const itemData = await itemService.getItems(taskId, sortedData);
+      // setTask(itemData);
+    };
+    getTask();
+  }, [taskId]);
 
-    return(
-        <>
-            <h1>{task.name}</h1>
-            <h2>{user.username} TodoLists: </h2>
-            {task.items.map((item) => (
-                <div key={item._id}>
-                    <input type="checkbox" name="list-items"/>
-                    <label htmlFor="list-items">{item.text}</label>
-                </div>
-            ))}
-            <h2>{user.username} Notes: </h2>
-            {task.notes.map((note) => (
-                <div key={note._id}>
-                    <h3>Title: {note.title}</h3>
-                    <p>Content: {note.content}</p>
-                </div>
-            ))} 
-        </>
-    )
+  const handleAddItem = async (todolist) => {
+    const newItem = await itemService.create(taskId, todolist);
+    const copyItem = { ...task };
+    copyItem.items.push(newItem);
+
+    setTask(copyItem);
+  };
+
+  if (!task) return <main>Loading Task...</main>;
+
+  return (
+    <>
+      <h1>{task.name}</h1>
+      <h2>{user.username} TodoLists: </h2>
+      {task.items.map((item) => (
+        <div key={item._id}>
+          <input type="checkbox" name="list-items" />
+          <label htmlFor="list-items">{item.text}</label>
+        </div>
+      ))}
+      <br />
+      {showForm ? (
+        <ItemForm handleAddItem={handleAddItem} />
+      ) : (
+        <button onClick={() => setShowForm(true)}>Add Item</button>
+      )}
+      <h2>{user.username} Notes: </h2>
+      {task.notes.map((note) => (
+        <div key={note._id}>
+          <h3>Title: {note.title}</h3>
+          <p>Content: {note.content}</p>
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default TaskDetails;
