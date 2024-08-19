@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-import * as taskService from '../../services/taskService';
+import { useParams } from "react-router-dom";
+import * as taskService from "../../services/taskService";
+import ItemForm from "../ItemForm/ItemForm";
+import * as itemService from "../../services/itemService";
 
 const TaskDetails = ({ user }) => {
-    const [task, setTask] = useState(null);
-    // create state for high priority list items
-    const [item, setItem] = useState(null);
+  const [task, setTask] = useState(null);
 
-    const { taskId } = useParams();
+  const [showForm, setShowForm] = useState(false);
 
-    useEffect(() => {
-        const getTask = async () => {
-            const priorities = ['Low', 'Medium', 'High']
+  const { taskId } = useParams();
+
+  useEffect(() => {
+    const getTask = async () => {
+      const priorities = ["Low", "Medium", "High"];
 
             const taskData = await taskService.show(taskId);
             setTask(taskData);
-            //SORT ITEMS BY DATE 
-            const sortedByDate = taskData.items.sort((a, b) => new Date(...a.dueDate.split('/').reverse()) - new Date(...b.dueDate.split('/').reverse()));
-            
-            // SORT ITEMS BY PRIORITY
+
+            // SORT TASKS BY PRIORITY
             console.log(taskData)
             const sortedData = taskData.items.sort((a, b) => priorities.indexOf(b.priority) - priorities.indexOf(a.priority))
-            console.log(taskData)
+            
         };
         getTask();
     }, [taskId]);
@@ -44,7 +44,6 @@ const TaskDetails = ({ user }) => {
                     <h3>Title: {note.title}</h3>
                     <p>Content: {note.content}</p>
                 </div>
-                
             ))} 
         </>
     )
