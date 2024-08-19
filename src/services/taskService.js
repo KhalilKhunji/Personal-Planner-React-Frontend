@@ -24,5 +24,21 @@ const show = async (taskId) => {
   };
 };
 
+const create = async (formData) => {
+  try {
+    const res = await fetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+    return res.json();
+  } catch (error) {
+    console.error("Error", error);
+  };
+};
 
-export { index , show };
+
+export { index, show, create };

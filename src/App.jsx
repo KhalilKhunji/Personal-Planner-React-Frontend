@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
 import Collection from './components/Collection/Collection';
@@ -21,9 +21,17 @@ const App = () => {
   const [user, setUser] = useState(authService.getUser());
   const [tasks, setTasks] = useState([]);
 
+  const navigate = useNavigate();
+
   const handleSignout = () => {
     authService.signout();
     setUser(null);
+  };
+
+  const handleAddTask = async (formData) => {
+    const newTask = await taskService.create(formData);
+    setTasks([...tasks, newTask]);
+    navigate('/tasks');
   };
 
   useEffect(() => {
@@ -45,7 +53,7 @@ const App = () => {
           <Route path="/" element={<Collection user={user} />} />
           <Route path="/tasks" element={<TaskList user={user} tasks={tasks} />} />
           <Route path="/tasks/:taskId" element={<TaskDetails user={user}/>} />
-          <Route path="/tasks/new" element={<TaskForm />} />
+          <Route path="/tasks/new" element={<TaskForm handleAddTask={handleAddTask} />} />
           <Route path="/tasks/:taskId/edit" element={<TaskForm />} />
           </>
         ) : (
