@@ -15,11 +15,13 @@ const TaskDetails = ({ user }) => {
 
             const taskData = await taskService.show(taskId);
             setTask(taskData);
-
-            // SORT TASKS BY PRIORITY
+            //SORT ITEMS BY DATE 
+            const sortedByDate = taskData.items.sort((a, b) => new Date(...a.dueDate.split('/').reverse()) - new Date(...b.dueDate.split('/').reverse()));
+            
+            // SORT ITEMS BY PRIORITY
             console.log(taskData)
             const sortedData = taskData.items.sort((a, b) => priorities.indexOf(b.priority) - priorities.indexOf(a.priority))
-            
+            console.log(taskData)
         };
         getTask();
     }, [taskId]);
