@@ -4,12 +4,22 @@ import * as taskService from '../../services/taskService';
 
 const TaskDetails = ({ user }) => {
     const [task, setTask] = useState(null);
+    // create state for high priority list items
+    const [item, setItem] = useState(null);
+
     const { taskId } = useParams();
 
     useEffect(() => {
         const getTask = async () => {
+            const priorities = ['Low', 'Medium', 'High']
+
             const taskData = await taskService.show(taskId);
             setTask(taskData);
+
+            // SORT TASKS BY PRIORITY
+            console.log(taskData)
+            const sortedData = taskData.items.sort((a, b) => priorities.indexOf(b.priority) - priorities.indexOf(a.priority))
+            
         };
         getTask();
     }, [taskId]);
