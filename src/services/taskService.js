@@ -4,14 +4,14 @@ const index = async () => {
   try {
     const response = await fetch(BASE_URL, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     });
-    return await response.json();
+    return response.json();
   } catch (error) {
     console.error("Error:", error);
-  }
+  };
 };
 
 
-export default { index };
+export { index };

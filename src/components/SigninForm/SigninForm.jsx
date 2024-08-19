@@ -24,7 +24,7 @@ const SigninForm = (props) => {
     try {
       const user = await authService.signin(formData);
       props.setUser(user);
-      navigate('/');
+      navigate('/tasks');
     } catch (err) {
       updateMessage(err.message);
     }
