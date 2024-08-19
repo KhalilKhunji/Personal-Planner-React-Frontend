@@ -44,6 +44,7 @@ const TaskDetails = ({ user }) => {
                     <h3>Title: {note.title}</h3>
                     <p>Content: {note.content}</p>
                 </div>
+                
             ))} 
         </>
     )
