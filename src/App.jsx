@@ -44,7 +44,7 @@ const App = () => {
           <>
           <Route path="/" element={<Collection user={user} />} />
           <Route path="/tasks" element={<TaskList user={user} tasks={tasks} />} />
-          <Route path="/tasks/:taskId" element={<TaskDetails />} />
+          <Route path="/tasks/:taskId" element={<TaskDetails user={user}/>} />
           <Route path="/tasks/new" element={<TaskForm />} />
           <Route path="/tasks/:taskId/edit" element={<TaskForm />} />
           </>

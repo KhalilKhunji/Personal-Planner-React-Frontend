@@ -19,8 +19,18 @@ const TaskDetails = ({ user }) => {
     return(
         <>
             <h1>{task.name}</h1>
+            <h2>{user.username} TodoLists: </h2>
+            {task.items.map((item) => (
+                <div key={item._id}>
+                    <h3>{item.text}</h3>
+                </div>
+            ))}
+            <h2>{user.username} Notes: </h2>
             {task.notes.map((note) => (
-                note.title
+                <div key={note._id}>
+                    <h3>Title: {note.title}</h3>
+                    <p>Content: {note.content}</p>
+                </div>
             ))} 
         </>
     )
