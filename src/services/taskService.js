@@ -13,5 +13,16 @@ const index = async () => {
   };
 };
 
+const show = async (taskId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${taskId}` , {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    })
+    return res.json()
+  } catch(error) {
+    console.error("Error:", error )
+  }
+}
 
-export { index };
+
+export { index , show };
