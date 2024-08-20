@@ -27,7 +27,7 @@ const TaskDetails = ({ user }) => {
       setTask(taskData);
     };
     getTask();
-  }, [taskId, task]);
+  }, [task]);
 
   // handleAddItem, handleUpdateItem, handleDeleteItem
 
