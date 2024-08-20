@@ -3,8 +3,8 @@ const Landing = () => {
       <main>
         <h1>A Personal Planner App</h1>
         <h3>
-          Ever needed to keep track of personal tasks and projects? Well look no further!
-          Sign up for a simple, but robust personal tracking app which list-making note-taking capabilities!
+          Need to track personal tasks and projects? Well, look no further!
+          Sign up for a simple, yet robust personal tracking app with list-making note-taking capabilities!
         </h3>
       </main>
     );

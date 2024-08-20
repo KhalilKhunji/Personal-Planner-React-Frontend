@@ -5,18 +5,14 @@ const NavBar = ({ user, handleSignout }) => {
     <>
       { user ? (
         <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/tasks">Tasks List</Link></li>
-            <li><Link to="" onClick={handleSignout}>Sign Out</Link></li>
-          </ul>
+            <p><Link to="/">Home</Link></p>
+            <p><Link to="/tasks">Tasks List</Link></p>
+            <p><Link to="" onClick={handleSignout}>Sign Out</Link></p>
         </nav>
       ) : (
         <nav>
-          <ul>
-            <li><Link to="/signin">Sign In</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
-          </ul>
+            <p><Link to="/signin">Sign In</Link></p>
+            <p><Link to="/signup">Sign Up</Link></p>
         </nav>
       )}
     </>
