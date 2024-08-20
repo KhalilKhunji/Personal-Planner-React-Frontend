@@ -17,4 +17,37 @@ const getItems = async (taskId,todolist) => {
   }
 };
 
-export { getItems};
+const updateItem = async (taskId, itemId, todolist) => {
+  try {
+    const option = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todolist),
+    };
+    const res = await fetch(`${BASE_URL}/${taskId}/items/${itemId}`, option);
+    return res.json();
+  }
+  catch (error) {
+    console.error("Error", error);
+  }
+}
+
+const deleteItem = async (taskId, itemId) => {
+  try {
+    const option = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const res = await fetch(`${BASE_URL}/${taskId}/items/${itemId}`, option);
+    return res.json();
+  } catch (error) {
+    console.error("Error", error);
+  }
+}
+
+export { getItems, updateItem , deleteItem };
