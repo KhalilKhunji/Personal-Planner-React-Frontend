@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import * as taskService from "../../services/taskService";
 import ItemForm from "../ItemForm/ItemForm";
 import * as itemService from "../../services/itemService";
+import NoteForm from "../NoteForm/NoteForm";
 
 const TaskDetails = ({ user }) => {
   const [task, setTask] = useState(null);
@@ -52,6 +53,7 @@ const TaskDetails = ({ user }) => {
       ) : (
         <button onClick={() => setShowForm(true)}>Add Item</button>
       )}
+      
       <h2>{user.username} Notes: </h2>
       {task.notes.map((note) => (
         <div key={note._id}>
@@ -59,6 +61,12 @@ const TaskDetails = ({ user }) => {
           <p>Content: {note.content}</p>
         </div>
       ))}
+       <br />
+      {showForm ? (
+        <NoteForm handleAddItem={handleAddItem} />
+      ) : (
+        <button onClick={() => setShowForm(true)}>Add Note</button>
+      )}
     </>
   );
 };
