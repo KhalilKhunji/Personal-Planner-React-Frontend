@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import * as taskService from "../../services/taskService";
 import ItemForm from "../ItemForm/ItemForm";
 import * as itemService from "../../services/itemService";
+import NoteForm from "../NoteForm/NoteForm";
+import * as noteService from "../../services/noteService";
+// import "../../stylingCss/taskDetailsStyle.css";
 
 const TaskDetails = ({ user }) => {
   const [task, setTask] = useState(null);
@@ -16,21 +19,21 @@ const TaskDetails = ({ user }) => {
     const getTask = async () => {
       const priorities = ["Low", "Medium", "High"];
       const taskData = await taskService.show(taskId);
-      setTask(taskData);
-      const sortedData = taskData.items.sort(
+      taskData.items.sort(
         (a, b) =>
           priorities.indexOf(b.priority) - priorities.indexOf(a.priority)
       );
+      setTask(taskData);
     };
     getTask();
-  }, [taskId]);
+  }, [taskId, task]);
 
   const handleAddItem = async (todolist) => {
     const newItem = await itemService.getItems(taskId, todolist);
     const copyItem = { ...task };
     copyItem.items.push(newItem);
     setTask(copyItem);
-    setshowItemForm(false);
+    setShowItemForm(false);
   };
 
   const handleAddNote = async (note) => {
@@ -77,12 +80,16 @@ const TaskDetails = ({ user }) => {
       ))}
       </section>
       <br />
-      {showForm ? (
-        <ItemForm handleAddItem={handleAddItem} />
+      <section className="Note-list">
+      <h2>{user.username} Notes:</h2>
+      {showNoteForm ? (
+        <>
+          <NoteForm handleAddNote={handleAddNote} />
+          <button onClick={() => setShowNoteForm(false)}>Cancel Note</button>
+        </>
       ) : (
-        <button onClick={() => setShowForm(true)}>Add Item</button>
+        <button onClick={() => setShowNoteForm(true)}>Add Note</button>
       )}
-      <h2>{user.username} Notes: </h2>
       {task.notes.map((note) => (
         <dl key={note._id} style={{ marginBottom: "1em" }}>
           <dt style={{ fontWeight: "bold" }}>Title:</dt>
@@ -91,6 +98,7 @@ const TaskDetails = ({ user }) => {
           <dd>{note.content}</dd>
         </dl>
       ))}
+      </section>
     </>
   );
 };
