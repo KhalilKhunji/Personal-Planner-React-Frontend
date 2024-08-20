@@ -30,7 +30,7 @@ const ItemForm = ({handleAddItem}) => {
             <input type="checkbox" name="isComplete" id="isComplete" value={todolist.isComplete}  onChange={handleChange}/>
             <br />
             <label htmlFor="dueDate">Due Date:</label>
-            <input type="date" name="dueDate" id="dueDate" value={todolist.dueDate} onChange={handleChange}/>
+            <input type="date" name="dueDate" id="dueDate" min={new Date().toISOString().split('T')[0]} value={todolist.dueDate} onChange={handleChange}/>
             <br />
             <label htmlFor="priority">Priority:</label>
             <select name="priority" id="priority" value={todolist.priority} onChange={handleChange}>
