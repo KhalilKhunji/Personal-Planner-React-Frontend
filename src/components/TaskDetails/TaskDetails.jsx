@@ -13,6 +13,7 @@ const TaskDetails = ({ user }) => {
   const [showItemForm, setShowItemForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [trigger, setTrigger] = useState(false)
 
   const { taskId } = useParams();
 
@@ -27,7 +28,7 @@ const TaskDetails = ({ user }) => {
       setTask(taskData);
     };
     getTask();
-  }, [task]);
+  }, [trigger]);
 
   // handleAddItem, handleUpdateItem, handleDeleteItem
 
@@ -37,6 +38,7 @@ const TaskDetails = ({ user }) => {
     copyItem.items.push(newItem);
     setTask(copyItem);
     setShowItemForm(false);
+    setTrigger(!trigger)
   };
 
   const handleUpdateItem = async (itemId, updatedData) => {
@@ -54,6 +56,7 @@ const TaskDetails = ({ user }) => {
     } catch (error) {
       console.error("Error updating item:", error);
     }
+    setTrigger(!trigger)
   };
 
   const handleDeleteItem = async (itemId) => {
