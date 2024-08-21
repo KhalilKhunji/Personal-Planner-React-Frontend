@@ -114,6 +114,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
     } catch (error) {
       console.error("Error deleting Note:", error);
     }
+    setTrigger(!trigger);
   };
 
   
@@ -122,6 +123,10 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
     try {
       const updatedTask = await taskService.update(taskFormData, taskId);
       setTask(updatedTask);
+      const updatedTasks = tasks.map((task) => {
+        return task._id === taskId ? updatedTask : task;
+      });
+      setTasks(updatedTasks);
       setShowTaskForm(false);
       setShowTaskButtons(true);
     } catch (error) {
