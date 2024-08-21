@@ -12,6 +12,11 @@ const ItemForm = ({handleAddItem}) => {
 
     const handleChange = (event) => {
         setTodolist({...todolist, [event.target.name]: event.target.value})
+        if (event.target.name === 'isComplete') {
+            setTodolist({...todolist, [event.target.name]: event.target.checked})
+        } else {
+            setTodolist({...todolist, [event.target.name]: event.target.value})
+        }
     }
 
     const handleSubmit = (event) => {
