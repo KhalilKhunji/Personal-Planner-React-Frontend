@@ -264,7 +264,7 @@ button a {
 }
 
 .task-details-container form button {
-  width: auto;
+  width: 100%;
   background-color: #B30000;
   color: white;
   padding: 0.5rem 0.75rem;
