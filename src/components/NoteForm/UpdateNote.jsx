@@ -39,7 +39,7 @@ const UpdateForm = ({ note, handleUpdateNote, setSelectedNote }) => {
     onChange={handleChange}
   />
   <br />
-  <button type="submit">update </button>
+  <button type="submit">Update Note</button>
 </form>
 </>
 )

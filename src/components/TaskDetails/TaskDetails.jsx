@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as taskService from "../../services/taskService";
 import ItemForm from "../ItemForm/ItemForm";
 import * as itemService from "../../services/itemService";
@@ -7,16 +7,23 @@ import NoteForm from "../NoteForm/NoteForm";
 import * as noteService from "../../services/noteService";
 import UpdateForm from "../ItemForm/UpdateForm";
 import UpdateNote from "../NoteForm/UpdateNote";
+import UpdateTask from "../TaskForm/UpdateTask";
+import DeleteTask from "../TaskForm/DeleteTask";
 
-const TaskDetails = ({ user }) => {
+const TaskDetails = ({ user, setTasks, tasks }) => {
   const [task, setTask] = useState(null);
   const [showItemForm, setShowItemForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
+  const [showTaskForm, setShowTaskForm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showTaskButtons, setShowTaskButtons] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedNotes, setSelectedNote] = useState(null);
   const [trigger, setTrigger] = useState(false);
 
   const { taskId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getTask = async () => {
@@ -110,40 +117,87 @@ const TaskDetails = ({ user }) => {
     }
   };
 
+  const handleUpdateTask = async (taskFormData, taskId) => {
+    try {
+      const updatedTask = await taskService.update(taskFormData, taskId);
+      setTask(updatedTask);
+      setShowTaskForm(false);
+      setShowTaskButtons(true);
+    } catch (error) {
+      console.error("Error Updating Task Name:", error);
+    };
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    try {
+      await taskService.remove(taskId);
+      const filteredTasks = tasks.filter((task) => task._id !== taskId);
+      setTasks(filteredTasks);
+      navigate('/tasks');
+    } catch (error) {
+      console.error("Error Deleting Task:", error);
+    };
+  };
+
+  const renderDeleteConfirm = () => {
+    setShowTaskButtons(!showTaskButtons);
+    setShowDeleteConfirm(!showDeleteConfirm);
+  };
+
+  const renderEditForm = () => {
+    setShowTaskButtons(!showTaskButtons);
+    setShowTaskForm(!showTaskForm);
+  };
+
   if (!task) return <main>Loading Task...</main>;
   return (
     <div className="task-details-container">
       <h1>{task.name}</h1>
-      <div className="task-details-content">
-        <section className="Item-list">
-          <h2>{user.username} TodoLists:</h2>
-          {showItemForm ? (
-            <>
-              <ItemForm handleAddItem={handleAddItem} />
-              <button onClick={() => setShowItemForm(false)}>
-                Cancel Item
-              </button>
-            </>
-          ) : (
-            <button onClick={() => setShowItemForm(true)}>Add Item</button>
-          )}
-          {task.items.map((item) => (
-            <div key={item._id}>
-              <ul>
-                <li>
-                  <strong>Name:</strong> {item.text}
-                </li>
-                <li>
-                  <strong>Is Complete:</strong> {item.isComplete ? "Yes" : "No"}
-                </li>
-                <li>
-                  <strong>Due Date:</strong>
-                  {new Date(item.dueDate).toLocaleDateString()}
-                </li>
-                <li>
-                  <strong>Priority:</strong> {item.priority}
-                </li>
-              </ul>
+      {showTaskForm ?
+        <UpdateTask task={task} taskId={taskId} handleUpdateTask={handleUpdateTask} render={renderEditForm} />
+        : 
+        <></>
+      }
+      {showDeleteConfirm ?
+        <DeleteTask handleDeleteTask={handleDeleteTask} taskId={taskId} render={renderDeleteConfirm} />
+      :
+      <></>
+      }
+      {showTaskButtons ?
+      <>
+      <button onClick={renderEditForm}>Edit Task Name</button>
+      <button className="delete" onClick={renderDeleteConfirm}>Delete Task</button>
+      </>
+      :
+      <></>
+      }
+      <section className="Item-list">
+        <h2>{user.username} TodoLists: </h2>
+        {showItemForm ? (
+          <>
+            <ItemForm handleAddItem={handleAddItem} />
+            <button onClick={() => setShowItemForm(false)}>Cancel Item</button>
+          </>
+        ) : (
+          <button onClick={() => setShowItemForm(true)}>Add Item</button>
+        )}
+        {task.items.map((item) => (
+          <div key={item._id}>
+            <ul>
+              <li>
+                <strong>Name:</strong> {item.text}
+              </li>
+              <li>
+                <strong>Is Complete:</strong> {item.isComplete ? "Yes" : "No"}
+              </li>
+              <li>
+                <strong>Due Date:</strong>
+                {new Date(item.dueDate).toLocaleDateString()}
+              </li>
+              <li>
+                <strong>Priority:</strong> {item.priority}
+              </li>
+            </ul>
 
               {selectedItem === item._id ? (
                 <UpdateForm
