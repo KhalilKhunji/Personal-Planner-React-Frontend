@@ -12,6 +12,11 @@ const UpdateForm = ({ item, handleUpdateItem, setSelectedItem }) => {
 
   const handleChange = (event) => {
     setUpdateForm({ ...UpdateForm, [event.target.name]: event.target.value });
+    if (event.target.name === "isComplete") {
+      setUpdateForm({ ...UpdateForm, [event.target.name]: event.target.checked });
+    } else {
+      setUpdateForm({ ...UpdateForm, [event.target.name]: event.target.value });
+    }
   };
 
   const handleSubmit = (event) => {
@@ -37,8 +42,9 @@ const UpdateForm = ({ item, handleUpdateItem, setSelectedItem }) => {
         type="checkbox"
         name="isComplete"
         id="isComplete"
+        checked={UpdateForm.isComplete}
         value={UpdateForm.isComplete}
-        onChange={handleChange}
+        onChange={handleChange} 
       />
       <br />
       <label htmlFor="dueDate">Due Date:</label>
