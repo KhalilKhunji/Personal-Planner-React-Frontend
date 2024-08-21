@@ -17,4 +17,37 @@ const getNotes = async (taskId,note) => {
     }
     };
 
-export { getNotes};
+    const updateNote = async (taskId,noteId,note) => {
+        try {
+            const option = {
+            method: "PUT",
+            headers: { 
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(note),
+            };
+            const res = await fetch(`${BASE_URL}/${taskId}/notes/${noteId}`, option);
+            return res.json();
+        }
+        catch (error) {
+            console.error("Error", error);
+        }
+        };
+
+        const deleteNote = async (taskId, noteId) => {
+            try {
+              const option = {
+                method: "DELETE",
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }, 
+              };
+              const res = await fetch(`${BASE_URL}/${taskId}/notes/${noteId}`, option);
+              return res.json();
+            } catch (error) {
+              console.error("Error", error);
+            }
+          }
+
+export { getNotes , updateNote , deleteNote};

@@ -6,6 +6,7 @@ import * as itemService from "../../services/itemService";
 import NoteForm from "../NoteForm/NoteForm";
 import * as noteService from "../../services/noteService";
 import UpdateForm from "../ItemForm/UpdateForm";
+import UpdateNote from "../NoteForm/UpdateNote";
 // import "../../stylingCss/taskDetailsStyle.css";
 
 const TaskDetails = ({ user }) => {
@@ -13,7 +14,8 @@ const TaskDetails = ({ user }) => {
   const [showItemForm, setShowItemForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [trigger, setTrigger] = useState(false)
+  const [selectedNotes, setSelectedNote] = useState(null);
+  const [trigger, setTrigger] = useState(false);
 
   const { taskId } = useParams();
 
@@ -38,7 +40,7 @@ const TaskDetails = ({ user }) => {
     copyItem.items.push(newItem);
     setTask(copyItem);
     setShowItemForm(false);
-    setTrigger(!trigger)
+    setTrigger(!trigger);
   };
 
   const handleUpdateItem = async (itemId, updatedData) => {
@@ -56,7 +58,7 @@ const TaskDetails = ({ user }) => {
     } catch (error) {
       console.error("Error updating item:", error);
     }
-    setTrigger(!trigger)
+    setTrigger(!trigger);
   };
 
   const handleDeleteItem = async (itemId) => {
@@ -77,6 +79,38 @@ const TaskDetails = ({ user }) => {
     copyNote.notes.push(newNote);
     setTask(copyNote);
     setShowNoteForm(false);
+  };
+
+  const handleUpdateNote = async (noteId, updatedData) => {
+    try {
+      const updatedNote = await noteService.updateNote(
+        taskId,
+        noteId,
+        updatedData
+      );
+      const updatedNotes = task.notes.map((note) =>
+        note._id === noteId ? updatedNote : note
+      );
+      setTask({ ...task, note: updatedNotes });
+      setSelectedItem(null);
+    } catch (error) {
+      console.error("Error updating note:", error);
+    }
+    setTrigger(!trigger);
+  };
+
+
+  
+  const handleDeleteNote = async (noteId) => {
+    try {
+      const deletedd = await noteService.deleteNote(taskId, noteId);
+      console.log(deletedd)
+      const updatedNote = task.notes.filter((note) => note._id !== noteId);
+
+      setTask({ ...task, notes: updatedNote });
+    } catch (error) {
+      console.error("Error deleting Note:", error);
+    }
   };
 
   if (!task) return <main>Loading Task...</main>;
@@ -138,12 +172,24 @@ const TaskDetails = ({ user }) => {
           <button onClick={() => setShowNoteForm(true)}>Add Note</button>
         )}
         {task.notes.map((note) => (
-          <dl key={note._id}>
-            <dt>Title:</dt>
-            <dd>{note.title}</dd>
-            <dt>Content:</dt>
-            <dd>{note.content}</dd>
-          </dl>
+          <div key={note._id}>
+            <dl>
+              <dt>Title:</dt>
+              <dd>{note.title}</dd>
+              <dt>Content:</dt>
+              <dd>{note.content}</dd>
+            </dl>
+            {selectedNotes === note._id ? (
+              <UpdateNote
+                note={note}
+                handleUpdateNote={handleUpdateNote}
+                setSelectedNote={setSelectedNote}
+              />
+            ) : (
+              <button onClick={() => setSelectedNote(note._id)}>Update</button>
+            )}
+            <button onClick={() => handleDeleteNote(note._id)}>Delete</button>
+          </div>
         ))}
       </section>
     </>
