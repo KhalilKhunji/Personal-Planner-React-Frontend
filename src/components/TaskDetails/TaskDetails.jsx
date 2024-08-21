@@ -77,7 +77,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
     }
   };
 
-  // handleAddNote
+  // handleAddNote , handleUpdateNote, handleDeleteNote
 
   const handleAddNote = async (note) => {
     const newNote = await noteService.getNotes(taskId, note);
@@ -108,7 +108,6 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
   const handleDeleteNote = async (noteId) => {
     try {
       const deletedd = await noteService.deleteNote(taskId, noteId);
-      console.log(deletedd);
       const updatedNote = task.notes.filter((note) => note._id !== noteId);
 
       setTask({ ...task, notes: updatedNote });
@@ -116,6 +115,8 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       console.error("Error deleting Note:", error);
     }
   };
+
+  // handleUpdateTask, handleDeleteTask, renderDeleteConfirm, renderEditForm
 
   const handleUpdateTask = async (taskFormData, taskId) => {
     try {
@@ -125,7 +126,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       setShowTaskButtons(true);
     } catch (error) {
       console.error("Error Updating Task Name:", error);
-    };
+    }
   };
 
   const handleDeleteTask = async (taskId) => {
@@ -133,10 +134,10 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       await taskService.remove(taskId);
       const filteredTasks = tasks.filter((task) => task._id !== taskId);
       setTasks(filteredTasks);
-      navigate('/tasks');
+      navigate("/tasks");
     } catch (error) {
       console.error("Error Deleting Task:", error);
-    };
+    }
   };
 
   const renderDeleteConfirm = () => {
@@ -153,51 +154,65 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
   return (
     <div className="task-details-container">
       <h1>{task.name}</h1>
-      {showTaskForm ?
-        <UpdateTask task={task} taskId={taskId} handleUpdateTask={handleUpdateTask} render={renderEditForm} />
-        : 
+      {showTaskForm ? (
+        <UpdateTask
+          task={task}
+          taskId={taskId}
+          handleUpdateTask={handleUpdateTask}
+          render={renderEditForm}
+        />
+      ) : (
         <></>
-      }
-      {showDeleteConfirm ?
-        <DeleteTask handleDeleteTask={handleDeleteTask} taskId={taskId} render={renderDeleteConfirm} />
-      :
-      <></>
-      }
-      {showTaskButtons ?
-      <>
-      <button onClick={renderEditForm}>Edit Task Name</button>
-      <button className="delete" onClick={renderDeleteConfirm}>Delete Task</button>
-      </>
-      :
-      <></>
-      }
-      <section className="Item-list">
-        <h2>{user.username} TodoLists: </h2>
-        {showItemForm ? (
-          <>
-            <ItemForm handleAddItem={handleAddItem} />
-            <button onClick={() => setShowItemForm(false)}>Cancel Item</button>
-          </>
-        ) : (
-          <button onClick={() => setShowItemForm(true)}>Add Item</button>
-        )}
-        {task.items.map((item) => (
-          <div key={item._id}>
-            <ul>
-              <li>
-                <strong>Name:</strong> {item.text}
-              </li>
-              <li>
-                <strong>Is Complete:</strong> {item.isComplete ? "Yes" : "No"}
-              </li>
-              <li>
-                <strong>Due Date:</strong>
-                {new Date(item.dueDate).toLocaleDateString()}
-              </li>
-              <li>
-                <strong>Priority:</strong> {item.priority}
-              </li>
-            </ul>
+      )}
+      {showDeleteConfirm ? (
+        <DeleteTask
+          handleDeleteTask={handleDeleteTask}
+          taskId={taskId}
+          render={renderDeleteConfirm}
+        />
+      ) : (
+        <></>
+      )}
+      {showTaskButtons ? (
+        <div className="Task-buttonChange">
+          <button onClick={renderEditForm}>Edit Task Name</button>
+          <button className="delete" onClick={renderDeleteConfirm}>
+            Delete Task
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
+      <div className="task-details-content">
+        <section className="Item-list">
+          <h2>{user.username} TodoLists:</h2>
+          {showItemForm ? (
+            <>
+              <ItemForm handleAddItem={handleAddItem} />
+              <button onClick={() => setShowItemForm(false)}>
+                Cancel Item
+              </button>
+            </>
+          ) : (
+            <button onClick={() => setShowItemForm(true)}>Add Item</button>
+          )}
+          {task.items.map((item) => (
+            <div key={item._id}>
+              <ul>
+                <li>
+                  <strong>Name:</strong> {item.text}
+                </li>
+                <li>
+                  <strong>Is Complete:</strong> {item.isComplete ? "Yes" : "No"}
+                </li>
+                <li>
+                  <strong>Due Date:</strong>
+                  {new Date(item.dueDate).toLocaleDateString()}
+                </li>
+                <li>
+                  <strong>Priority:</strong> {item.priority}
+                </li>
+              </ul>
 
               {selectedItem === item._id ? (
                 <UpdateForm

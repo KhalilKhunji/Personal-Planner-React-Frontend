@@ -141,6 +141,15 @@ button a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 0.15rem solid black;
   flex: 1; /* Allows both sections to take up equal space */
+  margin-top: 10px;
+}
+
+.Task-buttonChange {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  max-width: 50vw;
+  margin: 0.5rem 25vw;
 }
 
 /* Todo List Section */
@@ -264,3 +273,46 @@ button a {
   color: black;
 }
 
+/* Button container for the task name form */
+.task-nameButtons {
+  display: flex;
+  gap: 10px; /* Space between the buttons */
+  justify-content: center; /* Aligns buttons to the right */
+}
+
+/* General button styling */
+.task-nameButtons button,
+.DeleteTaskButton button {
+  background-color: #E58C8A;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.task-nameButtons button:hover,
+.DeleteTaskButton button:hover {
+  background-color: #EEC0C6;
+  color: black;
+}
+
+.Delete-Task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button container for the delete confirmation */
+.DeleteTaskButton {
+  display: flex;
+  gap: 10px; /* Space between the buttons */
+  justify-content: center; /* Center the buttons */
+}
+
+/* Specific styling for the delete button */
+.DeleteTaskButton .delete {
+  background-color: #D9534F; /* Red color for the delete button */
+  color: white;
+}
