@@ -185,7 +185,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       )}
       <div className="task-details-content">
         <section className="Item-list">
-          <h2>{user.username} TodoLists:</h2>
+          <h2>Todo List:</h2>
           {showItemForm ? (
             <>
               <ItemForm handleAddItem={handleAddItem} />
@@ -231,7 +231,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
         </section>
 
         <section className="Note-list">
-          <h2>{user.username} Notes:</h2>
+          <h2>Notes:</h2>
           {showNoteForm ? (
             <>
               <NoteForm handleAddNote={handleAddNote} />
