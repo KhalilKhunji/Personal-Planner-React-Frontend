@@ -136,7 +136,7 @@ button a {
 .task-details-content {
   display: flex;
   justify-content: space-between;
-  gap: 10px; /* Space between the two sections */
+  gap: 10px; 
 }
 
 .task-details-container section {
@@ -145,7 +145,7 @@ button a {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 0.15rem solid black;
-  flex: 1; /* Allows both sections to take up equal space */
+  flex: 1; 
   margin-top: 10px;
 }
 
@@ -159,7 +159,7 @@ button a {
 
 /* Todo List Section */
 .task-details-container .Item-list {
-  margin-right: 10px; /* Space between TodoList and Notes */
+  margin-right: 10px; 
 }
 
 .task-details-container .Item-list h2 {
@@ -172,9 +172,9 @@ button a {
   margin-bottom: 20px;
   padding: 15px;
   background-color: #fff;
-  border-radius: 8px; /* Rounded corners for a card-like effect */
-  border: 0.1rem solid #B30000; /* Matching border color with header */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px; 
+  border: 0.1rem solid #B30000; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .task-details-container .Item-list ul {
@@ -188,8 +188,8 @@ button a {
   padding: 10px;
   background-color: #fff;
   border-radius: 4px;
-  border: 0.1rem solid #B30000; /* Matching border color with container */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: 0.1rem solid #B30000; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .task-details-container .Item-list button {
@@ -209,7 +209,7 @@ button a {
 
 /* Note Section */
 .task-details-container .Note-list {
-  margin-left: 10px; /* Space between TodoList and Notes */
+  margin-left: 10px; 
 }
 
 .task-details-container .Note-list h2 {
@@ -223,8 +223,8 @@ button a {
   padding: 15px;
   background-color: #fff;
   border-radius: 8px;
-  border: 0.1rem solid #B30000; /* Border for note items */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: 0.1rem solid #B30000; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .task-details-container .Note-list dl {
@@ -281,8 +281,8 @@ button a {
 /* Button container for the task name form */
 .task-nameButtons {
   display: flex;
-  gap: 10px; /* Space between the buttons */
-  justify-content: center; /* Aligns buttons to the right */
+  gap: 10px; 
+  justify-content: center; 
 }
 
 /* General button styling */
@@ -312,12 +312,12 @@ button a {
 /* Button container for the delete confirmation */
 .DeleteTaskButton {
   display: flex;
-  gap: 10px; /* Space between the buttons */
-  justify-content: center; /* Center the buttons */
+  gap: 10px; 
+  justify-content: center; 
 }
 
 /* Specific styling for the delete button */
 .DeleteTaskButton .delete {
-  background-color: #D9534F; /* Red color for the delete button */
+  background-color: #D9534F; 
   color: white;
 }

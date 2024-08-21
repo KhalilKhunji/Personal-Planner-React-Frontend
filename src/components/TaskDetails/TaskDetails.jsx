@@ -38,7 +38,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
     getTask();
   }, [trigger]);
 
-  // handleAddItem, handleUpdateItem, handleDeleteItem
+  
 
   const handleAddItem = async (todolist) => {
     const newItem = await itemService.getItems(taskId, todolist);
@@ -77,7 +77,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
     }
   };
 
-  // handleAddNote , handleUpdateNote, handleDeleteNote
+  
 
   const handleAddNote = async (note) => {
     const newNote = await noteService.getNotes(taskId, note);
@@ -116,7 +116,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
     }
   };
 
-  // handleUpdateTask, handleDeleteTask, renderDeleteConfirm, renderEditForm
+  
 
   const handleUpdateTask = async (taskFormData, taskId) => {
     try {
