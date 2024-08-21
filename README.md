@@ -5,6 +5,13 @@
 ## Description 
 This is a personal planning react website that orginizes your Daily tasks. You need to login and make an account so you can use the application. inside of each task you can add items and notes those items and notes can be updated or deleted.
 
+
+## Deployed website 
+[Start here!](https://personal-planner-react-frontend.vercel.app/)
+
+
+## Attributions
+### [Chatgpt](https://chatgpt.com/) "used for half of the css"
 ## Technolgies used 
 - React 
 - Css
