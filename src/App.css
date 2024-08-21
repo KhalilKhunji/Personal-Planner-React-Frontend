@@ -14,7 +14,7 @@ body {
 /* Navbar styling */
 nav {
   overflow: hidden;
-  background-color: #E58C8A;
+  background-color: #B30000;
   display: flex;
 }
 
@@ -57,7 +57,7 @@ input[type=text], select, input[type=password] {
 
 button {
   width: 100%;
-  background-color: #E58C8A;
+  background-color: #B30000;
   color: white;
   padding: 0.5rem 0.75rem;
   margin: 0.25rem 0;
@@ -124,7 +124,7 @@ button a {
 .task-details-container h1 {
   font-size: 2em;
   margin-bottom: 20px;
-  color: #E58C8A;
+  color: #B30000;
   text-align: center;
 }
 
@@ -159,7 +159,7 @@ button a {
 
 .task-details-container .Item-list h2 {
   font-size: 1.5em;
-  color: #E58C8A;
+  color: #B30000;
   margin-bottom: 10px;
 }
 
@@ -168,7 +168,7 @@ button a {
   padding: 15px;
   background-color: #fff;
   border-radius: 8px; /* Rounded corners for a card-like effect */
-  border: 0.1rem solid #E58C8A; /* Matching border color with header */
+  border: 0.1rem solid #B30000; /* Matching border color with header */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
@@ -183,12 +183,12 @@ button a {
   padding: 10px;
   background-color: #fff;
   border-radius: 4px;
-  border: 0.1rem solid #E58C8A; /* Matching border color with container */
+  border: 0.1rem solid #B30000; /* Matching border color with container */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .task-details-container .Item-list button {
-  background-color: #E58C8A;
+  background-color: #B30000;
   color: white;
   padding: 0.5rem 0.75rem;
   margin: 0.5rem 0;
@@ -209,7 +209,7 @@ button a {
 
 .task-details-container .Note-list h2 {
   font-size: 1.5em;
-  color: #E58C8A;
+  color: #B30000;
   margin-bottom: 10px;
 }
 
@@ -218,7 +218,7 @@ button a {
   padding: 15px;
   background-color: #fff;
   border-radius: 8px;
-  border: 0.1rem solid #E58C8A; /* Border for note items */
+  border: 0.1rem solid #B30000; /* Border for note items */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
@@ -228,7 +228,7 @@ button a {
 
 .task-details-container .Note-list dt {
   font-weight: bold;
-  color: #E58C8A;
+  color: #B30000;
   margin-bottom: 5px;
 }
 
@@ -260,7 +260,7 @@ button a {
 
 .task-details-container form button {
   width: auto;
-  background-color: #E58C8A;
+  background-color: #B30000;
   color: white;
   padding: 0.5rem 0.75rem;
   border: none;
@@ -283,7 +283,7 @@ button a {
 /* General button styling */
 .task-nameButtons button,
 .DeleteTaskButton button {
-  background-color: #E58C8A;
+  background-color: #B30000;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
