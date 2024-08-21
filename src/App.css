@@ -116,3 +116,9 @@ button a {
   text-decoration: none;
   color: inherit;
 }
+
+/* Add task CSS */
+
+div .taskname {
+  margin-top: 1rem;
+}

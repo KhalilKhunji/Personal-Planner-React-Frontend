@@ -40,5 +40,21 @@ const create = async (formData) => {
   };
 };
 
+const update = async (formData, taskId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${taskId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+    return res.json();
+  } catch (error) {
+    console.error("Error", error)
+  };
+};
 
-export { index, show, create };
+
+export { index, show, create, update };

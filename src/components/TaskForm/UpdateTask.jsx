@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-const TaskForm = ({ handleAddTask }) => {
+const UpdateTask = ({ task, taskId, handleUpdateTask }) => {
   const [formData, setFormData] = useState({
-    name: "",
+    name: task.name
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddTask(formData);
+    handleUpdateTask(formData, taskId);
   };
 
   const handleChange = (event) => {
@@ -27,11 +27,11 @@ const TaskForm = ({ handleAddTask }) => {
           required
           onChange={handleChange}
         />
-        <button type="submit">Create Task!</button>
+        <button type="submit">Update Task!</button>
         </div>
       </form>
     </main>
   );
 };
 
-export default TaskForm;
+export default UpdateTask;

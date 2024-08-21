@@ -7,12 +7,13 @@ import NoteForm from "../NoteForm/NoteForm";
 import * as noteService from "../../services/noteService";
 import UpdateForm from "../ItemForm/UpdateForm";
 import UpdateNote from "../NoteForm/UpdateNote";
-// import "../../stylingCss/taskDetailsStyle.css";
+import UpdateTask from "../TaskForm/UpdateTask";
 
 const TaskDetails = ({ user }) => {
   const [task, setTask] = useState(null);
   const [showItemForm, setShowItemForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
+  const [showTaskForm, setShowTaskForm] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedNotes, setSelectedNote] = useState(null);
   const [trigger, setTrigger] = useState(false);
@@ -113,11 +114,31 @@ const TaskDetails = ({ user }) => {
     }
   };
 
+  const handleUpdateTask = async (taskFormData, taskId) => {
+    try {
+      const updatedTask = await taskService.update(taskFormData, taskId);
+      setTask(updatedTask);
+      setShowTaskForm(false);
+    } catch (error) {
+      console.error("Error Updating Task Name:", error);
+    };
+  };
+
   if (!task) return <main>Loading Task...</main>;
 
   return (
     <>
       <h1>{task.name}</h1>
+      {showTaskForm ?
+        <>
+        <UpdateTask task={task} taskId={taskId} handleUpdateTask={handleUpdateTask} />
+        <button onClick={() => setShowTaskForm(false)}>Cancel</button>
+        </>
+        : 
+        <></>
+      }
+      <button onClick={() => setShowTaskForm(true)}>Edit Task Name</button>
+      <button className="delete" onClick={() => handleDeleteTask(taskId)}>Delete Task</button>
       <section className="Item-list">
         <h2>{user.username} TodoLists: </h2>
         {showItemForm ? (
