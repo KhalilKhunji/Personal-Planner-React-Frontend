@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const UpdateTask = ({ task, taskId, handleUpdateTask }) => {
+const UpdateTask = ({ task, taskId, handleUpdateTask, render }) => {
   const [formData, setFormData] = useState({
     name: task.name
   });
@@ -28,6 +28,7 @@ const UpdateTask = ({ task, taskId, handleUpdateTask }) => {
           onChange={handleChange}
         />
         <button type="submit">Update Task!</button>
+        <button onClick={() => render()}>Cancel</button>
         </div>
       </form>
     </main>

@@ -52,9 +52,22 @@ const update = async (formData, taskId) => {
     });
     return res.json();
   } catch (error) {
-    console.error("Error", error)
+    console.error("Error", error);
   };
 };
 
+const remove = async (taskId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${taskId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    });
+    return res.json();
+  } catch (error) {
+    console.error("Error", error);
+  };
+};
 
-export { index, show, create, update };
+export { index, show, create, update, remove };
