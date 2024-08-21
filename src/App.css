@@ -72,7 +72,7 @@ button:hover {
 }
 
 /* Task index page */
-ul {
+.task-lists{
   display: flex;
   flex-direction: column;
   margin: 2rem auto;
@@ -99,9 +99,6 @@ li {
   border-top: 0.1rem solid #988f8f;
 }
 
-ul:first-child {
-  border-top: 0.15rem solid black;
-}
 
 .buttonContainer {
   display: flex;
@@ -116,3 +113,154 @@ button a {
   text-decoration: none;
   color: inherit;
 }
+
+/* TaskDetails Component Styles */
+.task-details-container {
+  padding: 20px;
+  background-color: #f5e8f2;
+  color: #333;
+}
+
+.task-details-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #E58C8A;
+  text-align: center;
+}
+
+.task-details-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Space between the two sections */
+}
+
+.task-details-container section {
+  background-color: #f5e7e7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 0.15rem solid black;
+  flex: 1; /* Allows both sections to take up equal space */
+}
+
+/* Todo List Section */
+.task-details-container .Item-list {
+  margin-right: 10px; /* Space between TodoList and Notes */
+}
+
+.task-details-container .Item-list h2 {
+  font-size: 1.5em;
+  color: #E58C8A;
+  margin-bottom: 10px;
+}
+
+.task-details-container .Item-list div {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px; /* Rounded corners for a card-like effect */
+  border: 0.1rem solid #E58C8A; /* Matching border color with header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.task-details-container .Item-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-details-container .Item-list ul li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 0.1rem solid #E58C8A; /* Matching border color with container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.task-details-container .Item-list button {
+  background-color: #E58C8A;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.task-details-container .Item-list button:hover {
+  background-color: #EEC0C6;
+  color: black;
+}
+
+/* Note Section */
+.task-details-container .Note-list {
+  margin-left: 10px; /* Space between TodoList and Notes */
+}
+
+.task-details-container .Note-list h2 {
+  font-size: 1.5em;
+  color: #E58C8A;
+  margin-bottom: 10px;
+}
+
+.task-details-container .Note-list div {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 0.1rem solid #E58C8A; /* Border for note items */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.task-details-container .Note-list dl {
+  margin: 0;
+}
+
+.task-details-container .Note-list dt {
+  font-weight: bold;
+  color: #E58C8A;
+  margin-bottom: 5px;
+}
+
+.task-details-container .Note-list dd {
+  margin: 0;
+  padding: 10px 0;
+  color: #666;
+  border-top: 0.1rem solid #EEC0C6;
+}
+
+/* Form styling */
+.task-details-container form {
+  margin-top: 20px;
+}
+
+.task-details-container input[type="text"],
+.task-details-container input[type="date"],
+.task-details-container textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;  
+  border: 0.1rem solid black;
+  border-radius: 0.25rem;
+}
+
+.task-details-container textarea {
+  resize: vertical;
+}
+
+.task-details-container form button {
+  width: auto;
+  background-color: #E58C8A;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.task-details-container form button:hover {
+  background-color: #EEC0C6;
+  color: black;
+}
+

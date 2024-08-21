@@ -4,7 +4,7 @@ const TaskList = ({tasks, user}) => {
     return (
         <>
         <section>
-        <ul>
+        <ul className='task-lists'>
             {tasks.map((task)=> (
                 <Link key={task._id} to={`/tasks/${task._id}`}>
                     <li>Task: {task.name}</li>

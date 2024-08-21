@@ -7,7 +7,6 @@ import NoteForm from "../NoteForm/NoteForm";
 import * as noteService from "../../services/noteService";
 import UpdateForm from "../ItemForm/UpdateForm";
 import UpdateNote from "../NoteForm/UpdateNote";
-// import "../../stylingCss/taskDetailsStyle.css";
 
 const TaskDetails = ({ user }) => {
   const [task, setTask] = useState(null);
@@ -99,12 +98,10 @@ const TaskDetails = ({ user }) => {
     setTrigger(!trigger);
   };
 
-
-  
   const handleDeleteNote = async (noteId) => {
     try {
       const deletedd = await noteService.deleteNote(taskId, noteId);
-      console.log(deletedd)
+      console.log(deletedd);
       const updatedNote = task.notes.filter((note) => note._id !== noteId);
 
       setTask({ ...task, notes: updatedNote });
@@ -114,85 +111,93 @@ const TaskDetails = ({ user }) => {
   };
 
   if (!task) return <main>Loading Task...</main>;
-
   return (
-    <>
+    <div className="task-details-container">
       <h1>{task.name}</h1>
-      <section className="Item-list">
-        <h2>{user.username} TodoLists: </h2>
-        {showItemForm ? (
-          <>
-            <ItemForm handleAddItem={handleAddItem} />
-            <button onClick={() => setShowItemForm(false)}>Cancel Item</button>
-          </>
-        ) : (
-          <button onClick={() => setShowItemForm(true)}>Add Item</button>
-        )}
-        {task.items.map((item) => (
-          <div key={item._id}>
-            <ul>
-              <li>
-                <strong>Name:</strong> {item.text}
-              </li>
-              <li>
-                <strong>Is Complete:</strong> {item.isComplete ? "Yes" : "No"}
-              </li>
-              <li>
-                <strong>Due Date:</strong>
-                {new Date(item.dueDate).toLocaleDateString()}
-              </li>
-              <li>
-                <strong>Priority:</strong> {item.priority}
-              </li>
-            </ul>
+      <div className="task-details-content">
+        <section className="Item-list">
+          <h2>{user.username} TodoLists:</h2>
+          {showItemForm ? (
+            <>
+              <ItemForm handleAddItem={handleAddItem} />
+              <button onClick={() => setShowItemForm(false)}>
+                Cancel Item
+              </button>
+            </>
+          ) : (
+            <button onClick={() => setShowItemForm(true)}>Add Item</button>
+          )}
+          {task.items.map((item) => (
+            <div key={item._id}>
+              <ul>
+                <li>
+                  <strong>Name:</strong> {item.text}
+                </li>
+                <li>
+                  <strong>Is Complete:</strong> {item.isComplete ? "Yes" : "No"}
+                </li>
+                <li>
+                  <strong>Due Date:</strong>
+                  {new Date(item.dueDate).toLocaleDateString()}
+                </li>
+                <li>
+                  <strong>Priority:</strong> {item.priority}
+                </li>
+              </ul>
 
-            {selectedItem === item._id ? (
-              <UpdateForm
-                item={item}
-                handleUpdateItem={handleUpdateItem}
-                setSelectedItem={setSelectedItem}
-              />
-            ) : (
-              <button onClick={() => setSelectedItem(item._id)}>Update</button>
-            )}
-            <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
-          </div>
-        ))}
-      </section>
+              {selectedItem === item._id ? (
+                <UpdateForm
+                  item={item}
+                  handleUpdateItem={handleUpdateItem}
+                  setSelectedItem={setSelectedItem}
+                />
+              ) : (
+                <button onClick={() => setSelectedItem(item._id)}>
+                  Update
+                </button>
+              )}
+              <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
+            </div>
+          ))}
+        </section>
 
-      <br />
-      <section className="Note-list">
-        <h2>{user.username} Notes:</h2>
-        {showNoteForm ? (
-          <>
-            <NoteForm handleAddNote={handleAddNote} />
-            <button onClick={() => setShowNoteForm(false)}>Cancel Note</button>
-          </>
-        ) : (
-          <button onClick={() => setShowNoteForm(true)}>Add Note</button>
-        )}
-        {task.notes.map((note) => (
-          <div key={note._id}>
-            <dl>
-              <dt>Title:</dt>
-              <dd>{note.title}</dd>
-              <dt>Content:</dt>
-              <dd>{note.content}</dd>
-            </dl>
-            {selectedNotes === note._id ? (
-              <UpdateNote
-                note={note}
-                handleUpdateNote={handleUpdateNote}
-                setSelectedNote={setSelectedNote}
-              />
-            ) : (
-              <button onClick={() => setSelectedNote(note._id)}>Update</button>
-            )}
-            <button onClick={() => handleDeleteNote(note._id)}>Delete</button>
-          </div>
-        ))}
-      </section>
-    </>
+        <section className="Note-list">
+          <h2>{user.username} Notes:</h2>
+          {showNoteForm ? (
+            <>
+              <NoteForm handleAddNote={handleAddNote} />
+              <button onClick={() => setShowNoteForm(false)}>
+                Cancel Note
+              </button>
+            </>
+          ) : (
+            <button onClick={() => setShowNoteForm(true)}>Add Note</button>
+          )}
+          {task.notes.map((note) => (
+            <div key={note._id}>
+              <dl>
+                <dt>Title:</dt>
+                <dd>{note.title}</dd>
+                <dt>Content:</dt>
+                <dd>{note.content}</dd>
+              </dl>
+              {selectedNotes === note._id ? (
+                <UpdateNote
+                  note={note}
+                  handleUpdateNote={handleUpdateNote}
+                  setSelectedNote={setSelectedNote}
+                />
+              ) : (
+                <button onClick={() => setSelectedNote(note._id)}>
+                  Update
+                </button>
+              )}
+              <button onClick={() => handleDeleteNote(note._id)}>Delete</button>
+            </div>
+          ))}
+        </section>
+      </div>
+    </div>
   );
 };
 
