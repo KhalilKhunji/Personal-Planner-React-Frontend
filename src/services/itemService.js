@@ -13,7 +13,7 @@ const getItems = async (taskId,todolist) => {
     const res = await fetch(`${BASE_URL}/${taskId}/items/`, option);
     return res.json();
   } catch (error) {
-    console.error("Error", error);
+    console.error("Something went Wrong!");
   }
 };
 
@@ -31,7 +31,7 @@ const updateItem = async (taskId, itemId, todolist) => {
     return res.json();
   }
   catch (error) {
-    console.error("Error", error);
+    console.error("Something went Wrong!");
   }
 }
 
@@ -46,7 +46,7 @@ const deleteItem = async (taskId, itemId) => {
     const res = await fetch(`${BASE_URL}/${taskId}/items/${itemId}`, option);
     return res.json();
   } catch (error) {
-    console.error("Error", error);
+    console.error("Something went Wrong!");
   }
 }
 

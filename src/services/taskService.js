@@ -9,7 +9,7 @@ const index = async () => {
     });
     return response.json();
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Something went Wrong!");
   };
 };
 
@@ -20,7 +20,7 @@ const show = async (taskId) => {
     });
     return res.json();
   } catch(error) {
-    console.error("Error:", error);
+    console.error("Something went Wrong!");
   };
 };
 
@@ -36,7 +36,7 @@ const create = async (formData) => {
     });
     return res.json();
   } catch (error) {
-    console.error("Error", error);
+    console.error("Something went Wrong!");
   };
 };
 
@@ -52,7 +52,7 @@ const update = async (formData, taskId) => {
     });
     return res.json();
   } catch (error) {
-    console.error("Error", error);
+    console.error("Something went Wrong!");
   };
 };
 
@@ -66,7 +66,7 @@ const remove = async (taskId) => {
     });
     return res.json();
   } catch (error) {
-    console.error("Error", error);
+    console.error("Something went Wrong!");
   };
 };
 

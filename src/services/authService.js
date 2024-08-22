@@ -12,7 +12,7 @@ const signup = async (formData) => {
     window.localStorage.setItem('token', json.token);
     return json;
   } catch (err) {
-    console.log(err);
+    console.error("Something went Wrong!");
     throw err;
   };
 };
@@ -38,7 +38,7 @@ const signin = async (user) => {
       return user;
     }
   } catch (err) {
-    console.log(err);
+    console.error("Something went Wrong!");
     throw err;
   }
 };

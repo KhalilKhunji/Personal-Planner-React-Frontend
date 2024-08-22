@@ -10,7 +10,7 @@ import UpdateNote from "../NoteForm/UpdateNote";
 import UpdateTask from "../TaskForm/UpdateTask";
 import DeleteTask from "../TaskForm/DeleteTask";
 
-const TaskDetails = ({ user, setTasks, tasks }) => {
+const TaskDetails = ({ setTasks, tasks }) => {
   const [task, setTask] = useState(null);
   const [showItemForm, setShowItemForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
@@ -62,7 +62,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       setTask({ ...task, items: updatedItems });
       setSelectedItem(null);
     } catch (error) {
-      console.error("Error updating item:", error);
+      console.error("Error updating item");
     }
     setTrigger(!trigger);
   };
@@ -73,7 +73,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       const updatedItems = task.items.filter((item) => item._id !== itemId);
       setTask({ ...task, items: updatedItems });
     } catch (error) {
-      console.error("Error deleting item:", error);
+      console.error("Error deleting item");
     }
   };
 
@@ -100,7 +100,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       setTask({ ...task, note: updatedNotes });
       setSelectedItem(null);
     } catch (error) {
-      console.error("Error updating note:", error);
+      console.error("Error updating note");
     }
     setTrigger(!trigger);
   };
@@ -112,7 +112,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
 
       setTask({ ...task, notes: updatedNote });
     } catch (error) {
-      console.error("Error deleting Note:", error);
+      console.error("Error deleting Note");
     }
     setTrigger(!trigger);
   };
@@ -130,7 +130,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       setShowTaskForm(false);
       setShowTaskButtons(true);
     } catch (error) {
-      console.error("Error Updating Task Name:", error);
+      console.error("Error Updating Task Name");
     }
   };
 
@@ -141,7 +141,7 @@ const TaskDetails = ({ user, setTasks, tasks }) => {
       setTasks(filteredTasks);
       navigate("/tasks");
     } catch (error) {
-      console.error("Error Deleting Task:", error);
+      console.error("Error Deleting Task");
     }
   };
 

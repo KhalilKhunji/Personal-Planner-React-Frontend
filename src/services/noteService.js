@@ -13,7 +13,7 @@ const getNotes = async (taskId,note) => {
         const res = await fetch(`${BASE_URL}/${taskId}/notes/`, option);
         return res.json();
     } catch (error) {
-        console.error("Error", error);
+        console.error("Something went Wrong!");
     }
     };
 
@@ -31,7 +31,7 @@ const getNotes = async (taskId,note) => {
             return res.json();
         }
         catch (error) {
-            console.error("Error", error);
+          console.error("Something went Wrong!");
         }
         };
 
@@ -46,7 +46,7 @@ const getNotes = async (taskId,note) => {
               const res = await fetch(`${BASE_URL}/${taskId}/notes/${noteId}`, option);
               return res.json();
             } catch (error) {
-              console.error("Error", error);
+              console.error("Something went Wrong!");
             }
           }
 
