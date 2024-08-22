@@ -1,14 +1,11 @@
 # Personal planner 
-
 ![alt text](image.png)
 
 ## Description 
-This is a personal planning react website that orginizes your Daily tasks. You need to login and make an account so you can use the application. inside of each task you can add items and notes those items and notes can be updated or deleted.
-
+A personal planning application which allows you to keep track of tasks by creating checklists and notes.
 
 ## Deployed website 
 [Start here!](https://personal-planner-react-frontend.vercel.app/)
-
 
 ## Attributions
 * [Chatgpt](https://chatgpt.com/) to assist with the latter half of the CSS.
@@ -22,7 +19,6 @@ This is a personal planning react website that orginizes your Daily tasks. You n
 
 ## Plan
 [Find the Trello Board with the plan here!](https://trello.com/b/3vFH3eQh/personal-planner-project)
-
 
 ## Improvments 
 - Adding a calender feature 
