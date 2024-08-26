@@ -10,7 +10,7 @@ import UpdateNote from "../NoteForm/UpdateNote";
 import UpdateTask from "../TaskForm/UpdateTask";
 import DeleteTask from "../TaskForm/DeleteTask";
 
-const TaskDetails = ({ setTasks, tasks }) => {
+const TaskDetails = ({ user, setTasks, tasks }) => {
   const [task, setTask] = useState(null);
   const [showItemForm, setShowItemForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
@@ -29,11 +29,15 @@ const TaskDetails = ({ setTasks, tasks }) => {
     const getTask = async () => {
       const priorities = ["Low", "Medium", "High"];
       const taskData = await taskService.show(taskId);
+      if (user._id === taskData.user._id) {
       taskData.items.sort(
         (a, b) =>
           priorities.indexOf(b.priority) - priorities.indexOf(a.priority)
       );
       setTask(taskData);
+      } else {
+        navigate('/');
+      };
     };
     getTask();
   }, [trigger]);
