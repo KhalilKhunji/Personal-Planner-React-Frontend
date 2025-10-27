@@ -5,12 +5,12 @@ const TaskList = ({tasks, user}) => {
         <>
         <section>
         <ul className='task-lists'>
-            {tasks.length === 0 ? <li>There are no tasks here!</li> : <></> }
-            {tasks.map((task)=> (
+            {tasks.length ? <li>There are no tasks here!</li> : 
+            (<>{tasks.map((task)=> (
                 <Link key={task._id} to={`/tasks/${task._id}`}>
                     <li>Task: {task.name}</li>
                 </Link>
-            ))}
+            ))}</>)}
         </ul>
         </section>
         <div className="buttonContainer"><button><Link to={`/tasks/new`}>Add Task!</Link></button></div>

@@ -23,7 +23,7 @@ const SigninForm = (props) => {
     event.preventDefault();
     try {
       const user = await authService.signin(formData);
-      props.setUser(user);
+      await props.setUser(user);
       navigate('/tasks');
     } catch (err) {
       updateMessage(err.message);
